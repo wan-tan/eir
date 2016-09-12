@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,300,700|Ubuntu:400,300,500,700);')
+
+
+// ------------------------------------------------------------------------------------
+// VARIABLES
+// ------------------------------------------------------------------------------------
+
+// FONTS
+$title_font = "Ubuntu"
+$read_font = "Lato"
+
+// COLORS
+$color1 = #086375
+$color2 = #1DD3B0
+$color3 = #35142C
+$color4 = #FFEE33
+$color5 = #B2FF9E
+$color6 = #F23AAB
+$color7 = #828AFF
+
+
+/* RGB */
+$color1_1 = rgba(244, 232, 193, 1);
+$color1_2 = rgba(160, 193, 185, 1);
+$color1_3 = rgba(112, 160, 175, 1);
+$color1_4 = rgba(112, 105, 147, 1);
+$color1_5 = rgba( 51,  30,  56, 1);
+
+
+// SIZES
+$nav-height = 30px
+$column-border-width = 3px
+
+// ------------------------------------------------------------------------------------
+// MIXINS
+// ------------------------------------------------------------------------------------
+media_queries = {
+ mobile : "only screen and (max-width: 600px)",
+ tablet : "only screen and (min-width: 601px) and (max-width: 800px)",
+ desktop : "only screen and (min-width: 801px) and (max-width: 1200px)"
+ wide  : "only screen and (min-width: 1201px)"
+}
+
+for_breakpoint(breakpoints)
+ conditions = ()
+ for breakpoint in breakpoints
+  push(conditions, media_queries[breakpoint])
+ conditions = join(", ", conditions)
+ @media conditions
+  {block}
+
+vendor(prop, args)
+ -webkit-{prop} args
+ -moz-{prop} args
+ -ms-{prop} args
+ -o-{prop} args
+ {prop} args
+
+border-radius()
+ vendor('border-radius', arguments)
+
+box-shadow()
+ vendor('box-shadow', arguments)
+
+transition()
+ vendor('transition', arguments)
+
+transform()
+ vendor('transform', arguments)
+
+transform-origin()
+ vendor('transform-origin', arguments)
+
+user-select()
+ vendor('user-select', arguments)
+
+background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
+ background-color startColor
+ if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
+  background-image -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
+ background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+ background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+ background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+ background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+ background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+
+
+
+
+
+// ------------------------------------------------------------------------------------
+// BASE
+// ------------------------------------------------------------------------------------
+
+html, body
+	background #fff
+	height 100%
+	width 100%
+	margin 0
+	padding 0
+	overflow hidden
+
+html, body, div, section
+	box-sizing border-box
+
+a
+	color #fff
+	text-decoration none
+
+p, ul, li, a
+	display inline-block
+	margin 0
+	padding 0
+
+p
+	line-height 2em
+	letter-spacing .01em
+
+body, p, input
+	font-weight normal
+	font-family $read_font
+
+h1, h2, h3, h4, h5
+	font-family  $title_font
